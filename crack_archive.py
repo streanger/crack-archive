@@ -4,6 +4,7 @@ import os
 import zipfile
 from time import sleep, time
 from termcolor import colored
+from rarfile import RarFile
 
 def script_path():
     path = os.path.realpath(os.path.dirname(sys.argv[0]))
@@ -55,6 +56,20 @@ def crack_7z(file, dictFile):
     #to be done
     print(42)
 
+def crack_rar(file, dictFile):
+    passwords = read_file(dictFile, rmnl=True)
+    if not passwords:
+        print("empty passwords dictionary...")
+        sys.exit()
+
+    password = "some_pass"
+    rar_ = RarFile(file)
+    rar_.extractall(pwd=password)
+
+    for key, password in enumerate(passwords):
+        print(42)
+    return True
+
 def pseudo_optargs(args):
     #make some useful optargs
     if len(args) > 1:
@@ -68,4 +83,5 @@ def pseudo_optargs(args):
 if __name__ == "__main__":
     path = script_path()                                #change dir to script one
     file, dictFile = pseudo_optargs(sys.argv[1:])       #get file and dictFile from user
-    crack_zip(file, dictFile)
+    #crack_zip(file, dictFile)
+    crack_rar(file, dictFile)
