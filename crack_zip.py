@@ -1,6 +1,6 @@
 ''' info:
     The zipfile module from the Python standard library supports only CRC32 encrypted zip files.
-    We need to use 7z tool and call it as subprocess
+    If we want to decompress an AES-128 encrypte file, we need to use 7z tool and call it as subprocess
 '''
 
 import sys
